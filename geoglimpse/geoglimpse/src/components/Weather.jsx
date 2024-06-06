@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function News({ query }) {
+function Weather({ query }) {
   const [data, setData] = useState(null);
 
   useEffect(
@@ -26,4 +26,4 @@ function News({ query }) {
   );
 }
 
-export default News;
+export default Weather;

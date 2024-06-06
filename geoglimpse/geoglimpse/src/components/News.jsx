@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function News({ query }) {
+function Weather({ query }) {
   const [data, setData] = useState(null);
 
   useEffect(
@@ -21,9 +21,9 @@ function News({ query }) {
 
   return (
     <div>
-      <h2>News</h2>
+      <h2>Weather</h2>
     </div>
   );
 }
 
-export default News;
+export default Weather;
