@@ -1,10 +1,8 @@
+require('dotenv').config()
 const express = require("express");
 const app = express();
 const port = 3002;
 
-require('dotenv').config({
-  path: './.env'
-});
 
 //Destructured the API Keys
 const { API_OpenWeather, API_GoogleMaps, API_News, API_RestfulCountries } = process.env
