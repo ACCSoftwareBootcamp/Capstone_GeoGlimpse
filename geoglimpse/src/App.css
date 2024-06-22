@@ -1,42 +1,129 @@
-#root {
-  max-width: 1280px;
+/* App.css */
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.navbar {
+  width: 100%;
+  background-color: #333;
+  padding: 10px;
+}
+
+.navbar .container-fluid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+}
+
+.navbar-brand {
+  font-size: 1.2em; /* Adjusted size */
+  color: #fff;
+}
+
+.nav-link {
+  font-size: 1em; /* Adjusted size */
+  color: #fff;
+  margin-right: 15px;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+
+.navbar-toggler {
+  border-color: #007bff;
+}
+
+.navbar-toggler-icon {
+  color: #007bff;
+}
+
+.UserButton {
+  font-size: 1em; /* Adjusted size */
+  color: #fff;
+  margin-left: auto;
+}
+
+.SignInButton {
+  font-size: 0.9em; /* Adjusted size */
+  color: #007bff;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  padding: 6px 12px; /* Adjusted size */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-left: auto;
+}
+
+.SignInButton:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
   text-align: center;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Match the navbar width */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #333;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.form-label {
+  font-size: 1.2em;
+  margin-bottom: 8px;
 }
 
-.card {
-  padding: 2em;
+.form-control {
+  font-size: 1.2em;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  width: 50%; /* Adjusted width */
+  margin: 0 auto; /* Centered the search bar */
 }
 
-.read-the-docs {
-  color: #888;
+.form-control::placeholder {
+  text-align: center; /* Center the placeholder text */
+}
+
+.btn-primary {
+  font-size: 1.2em;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
 }

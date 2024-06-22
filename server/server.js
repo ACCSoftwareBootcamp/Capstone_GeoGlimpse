@@ -1,12 +1,13 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const port = 3002;
+// import process.env
 
+const dotenv = process.env;
 
 //Destructured the API Keys
-const { API_OpenWeather, API_GoogleMaps, API_News, API_RestfulCountries } = process.env
-
+const { WEATHER_API, MAPS_API, NEWS_API, COUNTRIES_API } = process.env;
 
 // Middleware to handle JSON requests
 app.use(express.json());
