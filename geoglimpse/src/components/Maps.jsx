@@ -7,24 +7,24 @@ function Maps() {
 
   let API = 'AIzaSyA1u2rNLif_SR6WBSbtufuAOGa-OQ4dL1A'
 
-  // useEffect(
-  //   function () {
+  useEffect(
+    function () {
       
-  //       fetch(url)
-  //         .then(function (response) {
-  //           return response.json();
-  //         })
-  //         .then(function(data){
-  //           console.log(data)
-  //           setStr(data)
-  //           console.log(data)
-  //         })
-  //         .catch(function(error){
-  //           console.log(`There's an error and it says ${error}`)
-  //         });
-  //   },
-  //   []
-  // );
+        fetch(url)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function(data){
+            console.log(data)
+            setStr(data)
+            console.log(data)
+          })
+          .catch(function(error){
+            console.log(`There's an error and it says ${error}`)
+          });
+    },
+    []
+  );
 
   console.log(str)
   return (
@@ -37,7 +37,7 @@ function Maps() {
         loading="lazy"
         allowFullScreen
         referrerPolicy="no-referrer-when-downgrade"
-        src={`https://www.google.com/maps/embed/v1/place?key=${API}
+        src={`https://www.google.com/maps/embed/v1/place?key=${str}
           &q=Space+Needle,Seattle+WA`}>
       </iframe>
       {/* <iframe
@@ -68,9 +68,9 @@ function Maps() {
   height="250"
   frameBorder="0" style={{ border:0 }}
   referrerPolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyA1u2rNLif_SR6WBSbtufuAOGa-OQ4dL1A&origin=Oslo+Norway
+  src={`https://www.google.com/maps/embed/v1/directions?key=${str}&origin=Oslo+Norway
   &destination=Telemark+Norway
-  &avoid=tolls|highways"
+  &avoid=tolls|highways`}
   allowFullScreen>
 </iframe>
     </div>
