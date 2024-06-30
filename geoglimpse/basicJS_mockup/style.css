@@ -1,0 +1,136 @@
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
+header {
+  background-color: #f0f0f0;
+  padding: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar {
+  width: 80%;
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.nav-link {
+  font-weight: bold;
+}
+
+.main {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.search-container input {
+  flex: 1;
+  margin-right: 10px;
+  height: calc(1.5em + 0.75rem + 2px);
+  font-weight: bold;
+}
+
+.search-container input::placeholder {
+  font-weight: bold;
+}
+
+.search-container button {
+  height: calc(1.5em + 0.75rem + 2px);
+  font-weight: bold;
+}
+
+.results-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.result-card {
+  width: 100%;
+  text-align: center;
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.result-card .card-header {
+  font-size: 1.5rem;
+}
+
+.forecast-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.forecast-container .card {
+  flex: 1 1 100%;
+  max-width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .forecast-container .card {
+    flex: 1 1 45%;
+    max-width: 45%;
+  }
+}
+
+@media (min-width: 992px) {
+  .forecast-container .card {
+    flex: 1 1 30%;
+    max-width: 30%;
+  }
+}
+
+.result-card .card-header,
+.forecast-container .card-header {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.card-body {
+  background-color: rgba(255, 193, 7, 0.8);
+}
+
+.result-card .card-body,
+.forecast-container .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h5.card-title {
+  font-weight: bold;
+}
