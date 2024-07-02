@@ -1,11 +1,12 @@
-import { useState } from "react";
-import "./App.css";
 import { ClerkProvider } from "@clerk/clerk-react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Homepage from "./components/Homepage";
+import { Routes, Route } from "react-router-dom"; // Import Routes and Route
+import Header from "./components/Header";
+import Home from "./components/Home";
 import News from "./components/News";
-import Navbar from "./components/Navbar_Test";
-import NewSearch from "./components/NewSearch";
+import Weather from "./components/Weather";
+import Maps from "./components/Maps";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 
 function App() {
   const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -16,14 +17,13 @@ function App() {
 
   return (
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-      <Router>
-        {/* Defining the routes for the application */}
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/newsearch" element={<NewSearch />} />
-        </Routes>
-      </Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/weather" element={<Weather />} />
+        <Route path="/maps" element={<Maps />} />
+      </Routes>
     </ClerkProvider>
   );
 }

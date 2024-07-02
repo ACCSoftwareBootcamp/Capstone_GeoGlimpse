@@ -11,8 +11,11 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.2.5",
+    "boostrap": "^2.0.0",
+    "bootstrap": "^5.3.3",
     "clerk": "^0.8.3",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.4",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1"
   },
