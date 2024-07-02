@@ -5,12 +5,27 @@ function Countries({ query }) {
 
   useEffect(
     function () {
+
       if (query) {
-        fetch("/api/data?query=" + query)
+        // Create a variable url + query
+        let url ="https://restfulcountries.com/api/v1/countries/${query}";
+
+        fetch(url)
           .then(function (response) {
+            if (!response.ok) {
+              if (response.status === 404) {
+                throw new Error('Data not found');
+              } else if (response.status === 500) {
+                throw new Error('Server error');
+              } else {
+                throw new Error('Network response was not ok');
+              }
+            }
             return response.json();
           })
-          .then(setData)
+          .then(function(data){
+            setData(data);
+          })
           .catch(console.error);
       }
     },
@@ -21,7 +36,7 @@ function Countries({ query }) {
 
   return (
     <div>
-      <h2>Countries</h2>
+      <h2>Countries : {data.name}</h2>
     </div>
   );
 }
