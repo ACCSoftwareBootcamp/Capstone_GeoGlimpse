@@ -150,7 +150,7 @@ function Plan() {
               alt="Population Icon"
               style={{ width: "20px", marginRight: "5px" }}
             />
-            {parseInt(countryData.population).toLocaleString()}
+            {countryData.population}
           </Card.Text>
           <Card.Text style={{ textAlign: "center" }}>
             <img

@@ -154,7 +154,11 @@ function News() {
                   src={article.urlToImage || "https://via.placeholder.com/200"}
                   alt="News image"
                 />
-                <Card.Link href={article.url} target="_blank">
+                <Card.Link
+                  className="imgLink"
+                  href={article.url}
+                  target="_blank"
+                >
                   Read more
                 </Card.Link>
               </Card.Body>
