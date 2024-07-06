@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FcBusinessman } from "react-icons/fc";
 import {
   Container,
   Form,
@@ -114,7 +115,7 @@ function Plan() {
     if (!countryData) return null;
 
     const flagUrl = `https://flagsapi.com/${countryData.iso2}/flat/64.png`;
-    const presidentIcon = "https://placehold.co/50x50"; // President icon
+    const presidentIcon = <FcBusinessman className="bussineesIcon"/>; // President icon
     const populationIcon =
       "https://img.icons8.com/ios-filled/50/000000/user-group-man-man.png"; // Population icon
     const currencyIcon =
@@ -137,11 +138,12 @@ function Plan() {
             }}
           />
           <Card.Text style={{ textAlign: "center" }}>
-            <img
-              src={presidentIcon}
+            {/* <img
+              src={ }
               alt="President Icon"
               style={{ width: "20px", marginRight: "5px" }}
-            />
+            /> */}
+            {presidentIcon}
             {displayPresident(countryData.current_president)}
           </Card.Text>
           <Card.Text style={{ textAlign: "center" }}>
@@ -150,7 +152,7 @@ function Plan() {
               alt="Population Icon"
               style={{ width: "20px", marginRight: "5px" }}
             />
-            {parseInt(countryData.population).toLocaleString()}
+            {countryData.population}
           </Card.Text>
           <Card.Text style={{ textAlign: "center" }}>
             <img
