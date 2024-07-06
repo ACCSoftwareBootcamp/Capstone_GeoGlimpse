@@ -114,8 +114,7 @@ function Plan() {
     if (!countryData) return null;
 
     const flagUrl = `https://flagsapi.com/${countryData.iso2}/flat/64.png`;
-    const presidentIcon =
-      "https://img.icons8.com/ios-filled/50/000000/person-male.png"; // President icon
+    const presidentIcon = "https://placehold.co/50x50"; // President icon
     const populationIcon =
       "https://img.icons8.com/ios-filled/50/000000/user-group-man-man.png"; // Population icon
     const currencyIcon =

@@ -80,8 +80,7 @@ function Home() {
                 {displayPresident(countryData.current_president)}
               </Card.Text>
               <Card.Text>
-                <strong>Population:</strong>{" "}
-                {parseInt(countryData.population).toLocaleString()}
+                <strong>Population:</strong> {countryData.population}
               </Card.Text>
               <Card.Text>
                 <strong>Currency:</strong> {countryData.currency}
