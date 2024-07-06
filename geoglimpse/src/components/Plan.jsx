@@ -110,6 +110,18 @@ function Plan() {
       .join(" ");
   };
 
+  const populationDensity = () => {
+    // let copyOfCountryData = [...countryData]
+    let popNum = countryData.population
+    let countrySize = countryData.size
+    console.log(popNum,countrySize)
+    countrySize = countrySize.replaceAll(",", "").slice(0, countrySize.length - 4)
+    // countrySize = countrySize.slice(0, countrySize.length - 4)
+    popNum = popNum.replaceAll(",", "")
+    console.log(popNum, countrySize)
+    return `${(parseInt(popNum) / parseInt(countrySize)).toFixed(2)}/km²`
+  }
+
   const renderCountryInfo = () => {
     if (!countryData) return null;
 
@@ -150,7 +162,15 @@ function Plan() {
               alt="Population Icon"
               style={{ width: "20px", marginRight: "5px" }}
             />
-            {parseInt(countryData.population).toLocaleString()}
+            {countryData.population}
+          </Card.Text>
+          <Card.Text style={{ textAlign: "center" }}>
+            <img
+              src={populationIcon}
+              alt="Population Icon"
+              style={{ width: "20px", marginRight: "5px" }}
+            />
+            {populationDensity()}
           </Card.Text>
           <Card.Text style={{ textAlign: "center" }}>
             <img

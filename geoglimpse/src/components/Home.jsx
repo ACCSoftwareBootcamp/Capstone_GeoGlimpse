@@ -54,6 +54,18 @@ function Home() {
     }
   };
 
+  const populationDensity = () => {
+    // let copyOfCountryData = [...countryData]
+    let popNum = countryData.population
+    let countrySize = countryData.size
+    console.log(popNum,countrySize)
+    countrySize = countrySize.replaceAll(",", "").slice(0, countrySize.length - 4)
+    // countrySize = countrySize.slice(0, countrySize.length - 4)
+    popNum = popNum.replaceAll(",", "")
+    console.log(popNum, countrySize)
+    return `${(parseInt(popNum) / parseInt(countrySize)).toFixed(2)}/km²`
+  }
+
   return (
     <Container className="mt-4">
       <Form className="mb-4">
@@ -81,6 +93,9 @@ function Home() {
               </Card.Text>
               <Card.Text>
                 <strong>Population:</strong> {countryData.population}
+              </Card.Text>
+              <Card.Text>
+                <strong>Population Density:</strong> {populationDensity()}
               </Card.Text>
               <Card.Text>
                 <strong>Currency:</strong> {countryData.currency}
