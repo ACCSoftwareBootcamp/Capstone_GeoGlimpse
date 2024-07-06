@@ -121,7 +121,8 @@ function Plan() {
     // countrySize = countrySize.slice(0, countrySize.length - 4)
     popNum = popNum.replaceAll(",", "")
     console.log(popNum, countrySize)
-    return `${(parseInt(popNum) / parseInt(countrySize)).toFixed(2)}/km²`
+    // return `${(parseInt(popNum) / parseInt(countrySize)).toFixed(2)}/km²`
+    return `${(parseInt(popNum) / ((parseInt(countrySize)) / 0.621371)).toFixed(2)}/km²`
   }
   const renderCountryInfo = () => {
     if (!countryData) return null;
