@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { FcBusinessman } from "react-icons/fc";
+import { FaMapMarkedAlt } from "react-icons/fa";
+
 import {
   Container,
   Form,
@@ -110,14 +112,24 @@ function Plan() {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   };
-
+  const populationDensity = () => {
+    // let copyOfCountryData = [...countryData]
+    let popNum = countryData.population
+    let countrySize = countryData.size
+    console.log(popNum,countrySize)
+    countrySize = countrySize.replaceAll(",", "").slice(0, countrySize.length - 4)
+    // countrySize = countrySize.slice(0, countrySize.length - 4)
+    popNum = popNum.replaceAll(",", "")
+    console.log(popNum, countrySize)
+    return `${(parseInt(popNum) / parseInt(countrySize)).toFixed(2)}/km²`
+  }
   const renderCountryInfo = () => {
     if (!countryData) return null;
-
     const flagUrl = `https://flagsapi.com/${countryData.iso2}/flat/64.png`;
     const presidentIcon = <FcBusinessman className="bussineesIcon"/>; // President icon
     const populationIcon =
       "https://img.icons8.com/ios-filled/50/000000/user-group-man-man.png"; // Population icon
+    const populationDensityIcon = <FaMapMarkedAlt/>; //PopulationDensity icon
     const currencyIcon =
       "https://img.icons8.com/ios-filled/50/000000/currency-exchange.png"; // Currency icon
 
@@ -154,6 +166,10 @@ function Plan() {
             />
             {countryData.population}
           </Card.Text>
+          <Card.Text style={{ textAlign: "center" }}>
+            {populationDensityIcon}
+            {populationDensity()}
+            </Card.Text>
           <Card.Text style={{ textAlign: "center" }}>
             <img
               src={currencyIcon}
