@@ -106,7 +106,7 @@ body {
 }
 
 img {
-  max-width: 100%;
+  max-width: 60%;
   height: auto;
 }
 
@@ -117,4 +117,7 @@ h5.card-title {
 .bussineesIcon{
   width: "20px";
   margin-right : "5px"
+}
+.imgLink {
+  display: block;
 }
