@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FcBusinessman } from "react-icons/fc";
 import { FaMapMarkedAlt } from "react-icons/fa";
-
 import {
   Container,
   Form,
@@ -21,10 +20,10 @@ function Plan() {
   const [mapUrl, setMapUrl] = useState("");
   const [error, setError] = useState("");
 
-  const API_KEY_COUNTRIES = "944|4uv7UsVepzAiZtnsWmgBwRFO1Fzcttwp0QC1ihzU";
-  const API_KEY_WEATHER = "f7b89105db1741101a4c5b9283d6f938";
-  const API_KEY_NEWS = "8f2024498c2841d7ab642cfc7a0cceee";
-  const API_KEY_MAPS = "AIzaSyA1u2rNLif_SR6WBSbtufuAOGa-OQ4dL1A";
+  const API_KEY_COUNTRIES = import.meta.env.VITE_COUNTRIES_KEY;
+  const API_KEY_WEATHER = import.meta.env.VITE_WEATHER_KEY;
+  const API_KEY_NEWS = import.meta.env.VITE_NEWS_KEY;
+  const API_KEY_MAPS = import.meta.env.VITE_MAPS_KEY;
 
   const handleSearch = async () => {
     if (country) {
@@ -112,53 +111,44 @@ function Plan() {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   };
+
   const populationDensity = () => {
-    // let copyOfCountryData = [...countryData]
-    let popNum = countryData.population
-    let countrySize = countryData.size
-    console.log(popNum,countrySize)
-    countrySize = countrySize.replaceAll(",", "").slice(0, countrySize.length - 4)
-    // countrySize = countrySize.slice(0, countrySize.length - 4)
-    popNum = popNum.replaceAll(",", "")
-    console.log(popNum, countrySize)
-    return `${(parseInt(popNum) / parseInt(countrySize)).toFixed(2)}/km²`
-  }
+    let popNum = countryData.population;
+    let countrySize = countryData.size;
+    countrySize = countrySize
+      .replaceAll(",", "")
+      .slice(0, countrySize.length - 4);
+    popNum = popNum.replaceAll(",", "");
+    return `${(parseInt(popNum) / parseInt(countrySize)).toFixed(2)}/km²`;
+  };
+
   const renderCountryInfo = () => {
     if (!countryData) return null;
     const flagUrl = `https://flagsapi.com/${countryData.iso2}/flat/64.png`;
-    const presidentIcon = <FcBusinessman className="bussineesIcon"/>; // President icon
+    const presidentIcon = <FcBusinessman className="bussineesIcon" />; // President icon
     const populationIcon =
       "https://img.icons8.com/ios-filled/50/000000/user-group-man-man.png"; // Population icon
-    const populationDensityIcon = <FaMapMarkedAlt/>; //PopulationDensity icon
+    const populationDensityIcon = <FaMapMarkedAlt />; // PopulationDensity icon
     const currencyIcon =
       "https://img.icons8.com/ios-filled/50/000000/currency-exchange.png"; // Currency icon
 
     return (
       <Card className="mb-3">
-        <Card.Header style={{ textAlign: "center", fontSize: "1.5rem" }}>
-          Country Info
-        </Card.Header>
+        <Card.Header className="text-center fs-4">Country Info</Card.Header>
         <Card.Body>
           <Card.Img
             src={flagUrl}
             alt={`${countryData.name} flag`}
-            style={{
-              display: "block",
-              margin: "0 auto 10px auto",
-              width: "100px",
-              height: "auto",
-            }}
+            className="d-block mx-auto my-2"
+            style={{ width: "100px", height: "auto" }}
           />
-          <Card.Text style={{ textAlign: "center" }}>
-            {/* <img
-              src={ }
-              alt="President Icon"
-              style={{ width: "20px", marginRight: "5px" }}
-            /> */}
-            {presidentIcon}
-            {displayPresident(countryData.current_president)}
+          <Card.Text className="text-center">
+            {presidentIcon}{" "}
+            <span className="ms-2">
+              {displayPresident(countryData.current_president)}
+            </span>
           </Card.Text>
-          <Card.Text style={{ textAlign: "center" }}>
+          <Card.Text className="text-center">
             <img
               src={populationIcon}
               alt="Population Icon"
@@ -166,11 +156,11 @@ function Plan() {
             />
             {countryData.population}
           </Card.Text>
-          <Card.Text style={{ textAlign: "center" }}>
+          <Card.Text className="text-center">
             {populationDensityIcon}
-            {populationDensity()}
-            </Card.Text>
-          <Card.Text style={{ textAlign: "center" }}>
+            <span className="ms-2">{populationDensity()}</span>
+          </Card.Text>
+          <Card.Text className="text-center">
             <img
               src={currencyIcon}
               alt="Currency Icon"
@@ -178,7 +168,6 @@ function Plan() {
             />
             {countryData.currency}
           </Card.Text>
-          {/* Add other country info here */}
         </Card.Body>
       </Card>
     );
@@ -196,13 +185,11 @@ function Plan() {
         <Row>
           <Col md={12}>
             {filteredForecast[0] && (
-              <Card className="mb-3" style={{ width: "100%" }}>
-                <Card.Header
-                  style={{ fontSize: "1.5rem", textAlign: "center" }}
-                >
+              <Card className="weather-card mb-3" style={{ width: "100%" }}>
+                <Card.Header className="text-center fs-4">
                   {new Date(filteredForecast[0].dt * 1000).toLocaleDateString()}
                 </Card.Header>
-                <Card.Body style={{ fontSize: "1.2rem", textAlign: "center" }}>
+                <Card.Body className="text-center">
                   <Card.Text>
                     {Math.round(
                       ((filteredForecast[0].main.temp - 273.15) * 9) / 5 + 32
@@ -224,14 +211,14 @@ function Plan() {
             )}
           </Col>
         </Row>
-        <Row>
+        <Row className="forecast-container">
           {filteredForecast.slice(1, 5).map((forecast, index) => (
-            <Col key={index} sm={6} md={3}>
-              <Card className="mb-3">
-                <Card.Header>
+            <Col key={index} sm={6} md={3} className="d-flex">
+              <Card className="weather-card mb-3">
+                <Card.Header className="text-center fs-4">
                   {new Date(forecast.dt * 1000).toLocaleDateString()}
                 </Card.Header>
-                <Card.Body>
+                <Card.Body className="text-center">
                   <Card.Text>
                     {Math.round(((forecast.main.temp - 273.15) * 9) / 5 + 32)}{" "}
                     °F / {Math.round(forecast.main.temp - 273.15)} °C
@@ -256,15 +243,15 @@ function Plan() {
   const renderNews = () => {
     if (!newsData) return null;
 
-    return newsData.map((article, index) => (
-      <div key={index}>
+    return newsData.slice(0, 10).map((article, index) => (
+      <div key={index} className="mb-3">
         <Card.Title>{article.title}</Card.Title>
         <Card.Text>{article.description}</Card.Text>
         {article.urlToImage && (
           <Card.Img
             src={article.urlToImage}
             alt={article.title}
-            style={{ width: "100%", height: "auto", marginBottom: "10px" }}
+            className="news-image"
           />
         )}
         <a href={article.url} target="_blank" rel="noopener noreferrer">
@@ -277,13 +264,26 @@ function Plan() {
 
   return (
     <Container className="mt-4">
+      <Row>
+        <Col md={12} className="text-center mb-4">
+          <img
+            src="https://via.placeholder.com/150x150"
+            alt="Logo Placeholder"
+            className="d-block mx-auto my-3"
+          />
+          <h1>Learn, Plan, Go</h1>
+        </Col>
+      </Row>
       <Form className="mb-4">
         <Form.Group controlId="countryInput">
           <Form.Control
             type="text"
-            placeholder="Enter a country..."
+            placeholder="Search for a country to get started..."
             value={country}
             onChange={(e) => setCountry(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") handleSearch();
+            }}
           />
         </Form.Group>
         <Button variant="primary" onClick={handleSearch}>
@@ -297,16 +297,12 @@ function Plan() {
             <Col md={6}>{renderCountryInfo()}</Col>
             <Col md={6}>
               <Card className="mb-3">
-                <Card.Header
-                  style={{ textAlign: "center", fontSize: "1.5rem" }}
-                >
-                  Map
-                </Card.Header>
+                <Card.Header className="text-center fs-4">Map</Card.Header>
                 <Card.Body>
-                  <div style={{ height: "400px", width: "100%" }}>
+                  <div className="map-container">
                     <iframe
                       width="100%"
-                      height="100%"
+                      height="450"
                       frameBorder="0"
                       allowFullScreen
                       src={mapUrl}
@@ -320,9 +316,7 @@ function Plan() {
           <Row>
             <Col>
               <Card className="mb-3">
-                <Card.Header
-                  style={{ textAlign: "center", fontSize: "1.5rem" }}
-                >
+                <Card.Header className="text-center fs-4">
                   Weather Forecast
                 </Card.Header>
                 <Card.Body>{renderWeatherForecast()}</Card.Body>
@@ -332,17 +326,19 @@ function Plan() {
           <Row>
             <Col>
               <Card className="mb-3">
-                <Card.Header
-                  style={{ textAlign: "center", fontSize: "1.5rem" }}
-                >
-                  News
-                </Card.Header>
+                <Card.Header className="text-center fs-4">News</Card.Header>
                 <Card.Body>{renderNews()}</Card.Body>
               </Card>
             </Col>
           </Row>
         </div>
       )}
+      <footer className="mt-4 text-center">
+        <p>
+          <a href="/contact">Contact Us</a> | &copy; {new Date().getFullYear()}{" "}
+          GeoGlimpse
+        </p>
+      </footer>
     </Container>
   );
 }

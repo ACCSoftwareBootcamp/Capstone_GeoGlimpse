@@ -1,26 +1,47 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
-import News from "./components/News";
-import Weather from "./components/Weather";
-import Maps from "./components/Maps";
+import { Route, Routes } from "react-router-dom";
 import Plan from "./components/Plan";
 import Header from "./components/Header";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./index.css";
+import About from "./components/About";
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn,
+  SignIn,
+} from "@clerk/clerk-react";
+
+const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+console.log(
+  "Clerk Publishable Key:",
+  import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+);
 
 function App() {
   return (
-    <>
+    <ClerkProvider publishableKey={clerkPubKey}>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/news" element={<News />} />
-        <Route path="/weather" element={<Weather />} />
-        <Route path="/maps" element={<Maps />} />
-        <Route path="/plan" element={<Plan />} />
+        <Route
+          path="/"
+          element={
+            <SignedIn>
+              <Plan />
+            </SignedIn>
+          }
+        />
+        <Route
+          path="/sign-in/*"
+          element={
+            <SignedOut>
+              <SignIn path="/" routing="path" signUpUrl="/sign-up" />
+            </SignedOut>
+          }
+        />
+        <Route path="/about" element={<About />} />
       </Routes>
-    </>
+    </ClerkProvider>
   );
 }
 

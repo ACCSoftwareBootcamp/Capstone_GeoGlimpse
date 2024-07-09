@@ -1,33 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar, Container } from "react-bootstrap";
+import {
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/clerk-react";
 
 function Header() {
   return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand as={Link} to="/">
-        GeoGlimpse
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto">
-          <Nav.Link as={Link} to="/">
-            Home
-          </Nav.Link>
-          <Nav.Link as={Link} to="/news">
-            News
-          </Nav.Link>
-          <Nav.Link as={Link} to="/weather">
-            Weather
-          </Nav.Link>
-          <Nav.Link as={Link} to="/maps">
-            Maps
-          </Nav.Link>
-          <Nav.Link as={Link} to="/plan">
-            Plan
-          </Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
+    <Navbar bg="light" expand="lg" className="navbar-custom">
+      <Container fluid>
+        <Navbar.Brand as={Link} to="/" className="ms-3">
+          GeoGlimpse
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+          <Nav>
+            <Nav.Link as={Link} to="/about">
+              About
+            </Nav.Link>
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
     </Navbar>
   );
 }
