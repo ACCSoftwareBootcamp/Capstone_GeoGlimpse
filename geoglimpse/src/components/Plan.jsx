@@ -267,9 +267,10 @@ function Plan() {
       <Row>
         <Col md={12} className="text-center mb-4">
           <img
-            src="https://via.placeholder.com/150x150"
-            alt="Logo Placeholder"
+            src="https://photos.app.goo.gl/fELvyBd11XEVSj167"
+            alt="GeoGlimpse Logo"
             className="d-block mx-auto my-3"
+            style={{ width: "150px", height: "150px" }}
           />
           <h1>Learn, Plan, Go</h1>
         </Col>
@@ -334,10 +335,7 @@ function Plan() {
         </div>
       )}
       <footer className="mt-4 text-center">
-        <p>
-          <a href="/contact">Contact Us</a> | &copy; {new Date().getFullYear()}{" "}
-          GeoGlimpse
-        </p>
+        <p>&copy; {new Date().getFullYear()} GeoGlimpse</p>
       </footer>
     </Container>
   );

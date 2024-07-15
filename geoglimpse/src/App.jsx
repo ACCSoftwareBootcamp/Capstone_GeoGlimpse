@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Plan from "./components/Plan";
 import Header from "./components/Header";
 import About from "./components/About";
+import Contact from "./components/Contact";
 import {
   ClerkProvider,
   SignedIn,
@@ -40,6 +41,7 @@ function App() {
           }
         />
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </ClerkProvider>
   );

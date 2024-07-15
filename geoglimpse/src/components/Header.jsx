@@ -21,6 +21,9 @@ function Header() {
             <Nav.Link as={Link} to="/about">
               About
             </Nav.Link>
+            <Nav.Link as={Link} to="/contact">
+              Contact Us
+            </Nav.Link>
             <SignedOut>
               <SignInButton />
             </SignedOut>
