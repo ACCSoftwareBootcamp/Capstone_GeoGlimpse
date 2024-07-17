@@ -267,11 +267,13 @@ function Plan() {
       <Row>
         <Col md={12} className="text-center mb-4">
           <img
-            src="https://photos.app.goo.gl/fELvyBd11XEVSj167"
+            src="https://imagesupload.xyz/ib/LNH0dYjzVAHw7mG_1721258956.png"
             alt="GeoGlimpse Logo"
             className="d-block mx-auto my-3"
-            style={{ width: "150px", height: "150px" }}
+            style={{ width: "150px", height: "170px" }}
           />
+          <br></br>
+          <br></br>
           <h1>Learn, Plan, Go</h1>
         </Col>
       </Row>
