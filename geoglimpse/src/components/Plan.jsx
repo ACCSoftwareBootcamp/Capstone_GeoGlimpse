@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { React,useState } from "react";
 import { FcBusinessman } from "react-icons/fc";
 import { FaMapMarkedAlt } from "react-icons/fa";
+
 
 import {
   Container,
@@ -57,7 +58,11 @@ function Plan() {
         const newsResponse = await fetch(
           `https://newsapi.org/v2/top-headlines?country=${countryData.data.iso2}&apiKey=${API_KEY_NEWS}`
         );
-        const newsData = await newsResponse.json();
+        const newsData = await newsResponse.json()
+
+        //  // Limiting to 10 news articles
+        // const limitedNewsData = newsData.articles.slice(0, 10);
+      
 
         const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${API_KEY_MAPS}&q=${country}`;
 
@@ -90,6 +95,13 @@ function Plan() {
     }
   };
 
+  const hanldleKeyPress = async (e) =>{
+    if (e.key === "Enter") { 
+      handleSearch(); 
+    } 
+    
+  }
+
   const displayPresident = (president) => {
     if (typeof president === "string") {
       return president;
@@ -120,9 +132,9 @@ function Plan() {
     countrySize = countrySize.replaceAll(",", "").slice(0, countrySize.length - 4)
     // countrySize = countrySize.slice(0, countrySize.length - 4)
     popNum = popNum.replaceAll(",", "")
-    console.log(popNum, countrySize)
+    console.log((parseInt(popNum)) / (parseInt(countrySize)))
     // return `${(parseInt(popNum) / parseInt(countrySize)).toFixed(2)}/km²`
-    return `${(parseInt(popNum) / ((parseInt(countrySize)) / 0.621371)).toFixed(2)}/km²`
+    return `${(((parseInt(popNum)) / (parseInt(countrySize))) / 0.386102).toFixed(2)}/Mi²`
   }
   const renderCountryInfo = () => {
     if (!countryData) return null;
@@ -257,12 +269,15 @@ function Plan() {
   const renderNews = () => {
     if (!newsData) return null;
 
-    return newsData.map((article, index) => (
-      <div key={index}>
-        <Card.Title>{article.title}</Card.Title>
-        <Card.Text>{article.description}</Card.Text>
+    // Limiting to 10 news articles
+    const limitedNewsData = newsData.slice(0, 10);
+
+    return limitedNewsData.map((article, index) => (
+      <div className ="news" key={index}>
+        <h1 className="news_title">{article.title}</h1>
+        <p className="news_decs">{article.description}</p>
         {article.urlToImage && (
-          <Card.Img
+          <img
             src={article.urlToImage}
             alt={article.title}
             style={{ width: "100%", height: "auto", marginBottom: "10px" }}
@@ -279,14 +294,22 @@ function Plan() {
   return (
     <Container className="mt-4">
       <Form className="mb-4">
-        <Form.Group controlId="countryInput">
-          <Form.Control
+        {/* <Form.Group controlId="countryInput">
+          <Form.Control 
             type="text"
             placeholder="Enter a country..."
             value={country}
             onChange={(e) => setCountry(e.target.value)}
+            onKeyPress = {}
           />
-        </Form.Group>
+        </Form.Group> */}
+        <input 
+        type="text"
+        placeholder="Enter a country..."
+        value={country}
+        onChange={(e) => setCountry(e.target.value)}
+        onKeyPress={hanldleKeyPress}
+        />
         <Button variant="primary" onClick={handleSearch}>
           Search
         </Button>
@@ -294,30 +317,23 @@ function Plan() {
       {error && <Alert variant="danger">{error}</Alert>}
       {countryData && (
         <div className="results-container">
-          <Row>
-            <Col md={6}>{renderCountryInfo()}</Col>
-            <Col md={6}>
-              <Card className="mb-3">
-                <Card.Header
-                  style={{ textAlign: "center", fontSize: "1.5rem" }}
-                >
-                  Map
-                </Card.Header>
-                <Card.Body>
-                  <div style={{ height: "400px", width: "100%" }}>
+          <div className="countryInfor">
+            <Col className="column">{renderCountryInfo()}</Col>
+            <Col >
+              <div>
+                <header>Map</header>
+                <body>
+                  <div>
                     <iframe
-                      width="100%"
-                      height="100%"
-                      frameBorder="0"
                       allowFullScreen
                       src={mapUrl}
                       title="Map"
                     ></iframe>
                   </div>
-                </Card.Body>
-              </Card>
+                </body>
+              </div>
             </Col>
-          </Row>
+          </div>
           <Row>
             <Col>
               <Card className="mb-3">

@@ -8,6 +8,7 @@ import Plan from "./components/Plan";
 import Header from "./components/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+import './App.css';
 
 function App() {
   return (

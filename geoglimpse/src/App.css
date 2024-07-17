@@ -1,0 +1,19 @@
+.news {
+    width: 300px;
+}
+
+
+.countryInfor {
+    width: 100%;
+    display: flex;
+    font-weight: bold;
+    
+}
+.column {
+    margin: 20px;
+}
+
+div>iframe {
+    width: 100%;
+    height: 400px;
+}
