@@ -89,6 +89,11 @@ function Plan() {
     }
   };
 
+  const hanldleKeyPress = async (e) =>{
+    if (e.key === "Enter") { 
+      handleSearch(); 
+    } 
+
   const displayPresident = (president) => {
     if (typeof president === "string") {
       return president;
@@ -119,7 +124,7 @@ function Plan() {
       .replaceAll(",", "")
       .slice(0, countrySize.length - 4);
     popNum = popNum.replaceAll(",", "");
-    return `${(parseInt(popNum) / parseInt(countrySize)).toFixed(2)}/km²`;
+    return `${(((parseInt(popNum)) / (parseInt(countrySize))) / 0.386102).toFixed(2)}/Mi²`;
   };
 
   const renderCountryInfo = () => {
@@ -242,8 +247,11 @@ function Plan() {
 
   const renderNews = () => {
     if (!newsData) return null;
+    
+     // Limiting to 10 news articles
+     const limitedNewsData = newsData.slice(0, 10);
 
-    return newsData.slice(0, 10).map((article, index) => (
+    return limitedNewsData.map((article, index) => (
       <div key={index} className="mb-3">
         <Card.Title>{article.title}</Card.Title>
         <Card.Text>{article.description}</Card.Text>
@@ -284,9 +292,7 @@ function Plan() {
             placeholder="Search for a country to get started..."
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") handleSearch();
-            }}
+            onKeyPress={hanldleKeyPress()}
           />
         </Form.Group>
         <Button variant="primary" onClick={handleSearch}>
@@ -341,6 +347,7 @@ function Plan() {
       </footer>
     </Container>
   );
+}
 }
 
 export default Plan;
