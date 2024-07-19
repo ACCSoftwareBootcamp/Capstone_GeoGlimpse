@@ -147,12 +147,12 @@ function Plan() {
             className="d-block mx-auto my-2"
             style={{ width: "100px", height: "auto" }}
           />
-          <Card.Text className="text-center">
+          { countryData.current_president !== null && <Card.Text className="text-center">
             {presidentIcon}{" "}
             <span className="ms-2">
               {displayPresident(countryData.current_president)}
             </span>
-          </Card.Text>
+          </Card.Text>}
           <Card.Text className="text-center">
             <img
               src={populationIcon}
