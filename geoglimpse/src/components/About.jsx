@@ -6,23 +6,27 @@ function About() {
     <Container className="mt-4">
       <Row>
         <Col md={6}>
-          <h2>About Us</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-            vestibulum suscipit nunc ut fermentum. Nam egestas, justo ac
-            scelerisque vehicula, dui massa laoreet ligula, a facilisis arcu
-            ipsum at sapien.
-          </p>
-          <p>
-            Suspendisse potenti. Nunc hendrerit sapien eu tincidunt tempor.
-            Curabitur et leo augue. Curabitur vehicula, velit nec vulputate
-            placerat, felis sem consequat leo, ut cursus nisi mauris et nulla.
-          </p>
+          <br></br>
+          <br></br>
+          <h3>
+            <strong>Stop wondering. Start Wandering.</strong>
+          </h3>
+          <p>  
+          Welcome to GeoGlimpse, your one-stop portal for exploring the world! 
+          <br></br>
+          <br></br>
+          Whether you're a curious traveler, a lifelong learner, or just someone who loves to discover new places, GeoGlimpse provides a wealth of information at your fingertips. 
+          <br></br>
+          <br></br>
+          Simply search for in any country, and we'll instantly gather a snapshot of its weather, an interactive map to visualize its location, the latest headlines to understand its current events, and essential facts like currency, population, and leadership. 
+          <br></br>
+          <br></br>
+          GeoGlimpse is your passport to global knowledge!          </p>
         </Col>
         <Col md={6}>
           <Card>
             <Card.Img
-              src="https://via.placeholder.com/600x400"
+              src="https://imagesupload.xyz/ib/UvtfaaCyPzH4jPy_1721464831.jpg"
               alt="Placeholder"
             />
           </Card>

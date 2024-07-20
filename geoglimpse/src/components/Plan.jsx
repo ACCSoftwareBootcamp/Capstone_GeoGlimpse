@@ -69,10 +69,11 @@ function Plan() {
           )
         );
         setMapUrl(mapUrl);
+
         setError(""); // Clear any previous errors
       } catch (error) {
         console.error("Error fetching data:", error);
-        setError("Failed to fetch data. Please enter a valid country name.");
+        setError("Possible invalid country name. Wait 5 sec & retry.");
         setCountryData(null);
         setWeatherData(null);
         setForecastData(null);
@@ -89,6 +90,9 @@ function Plan() {
     }
   };
 
+  // -----------------------------------
+
+  // President info:
   const displayPresident = (president) => {
     if (typeof president === "string") {
       return president;
@@ -119,7 +123,7 @@ function Plan() {
       .replaceAll(",", "")
       .slice(0, countrySize.length - 4);
     popNum = popNum.replaceAll(",", "");
-    return `${(parseInt(popNum) / parseInt(countrySize)).toFixed(2)}/km²`;
+    return `${(((parseInt(popNum)) / (parseInt(countrySize))) / 0.386102).toFixed(2)}/Mi²`;
   };
 
   const renderCountryInfo = () => {
@@ -135,19 +139,23 @@ function Plan() {
     return (
       <Card className="mb-3">
         <Card.Header className="text-center fs-4">Country Info</Card.Header>
-        <Card.Body>
+        <Card.Body className="card-body-country">
           <Card.Img
             src={flagUrl}
             alt={`${countryData.name} flag`}
             className="d-block mx-auto my-2"
             style={{ width: "100px", height: "auto" }}
           />
-          <Card.Text className="text-center">
-            {presidentIcon}{" "}
-            <span className="ms-2">
-              {displayPresident(countryData.current_president)}
-            </span>
-          </Card.Text>
+
+          {/* If country's president doesn't appear */}
+          {countryData.current_president !== null && (
+            <Card.Text className="text-center">
+              {presidentIcon}{" "}
+              <span className="ms-2">
+                {displayPresident(countryData.current_president)}
+              </span>
+            </Card.Text>
+          )}
           <Card.Text className="text-center">
             <img
               src={populationIcon}
@@ -173,9 +181,13 @@ function Plan() {
     );
   };
 
+  // -----------------------------------
+
+  // OpenWeather API results box
   const renderWeatherForecast = () => {
     if (!forecastData) return null;
 
+    // Make the results show temps by the hour
     const filteredForecast = forecastData.filter((entry) =>
       entry.dt_txt.includes("12:00:00")
     );
@@ -211,6 +223,8 @@ function Plan() {
             )}
           </Col>
         </Row>
+
+        {/* 1st result spans more columns to let user know its current weather */}
         <Row className="forecast-container">
           {filteredForecast.slice(1, 5).map((forecast, index) => (
             <Col key={index} sm={6} md={3} className="d-flex">
@@ -220,8 +234,7 @@ function Plan() {
                 </Card.Header>
                 <Card.Body className="text-center">
                   <Card.Text>
-                    {Math.round(((forecast.main.temp - 273.15) * 9) / 5 + 32)}{" "}
-                    °F / {Math.round(forecast.main.temp - 273.15)} °C
+                    {Math.round(((forecast.main.temp - 273.15) * 9) / 5 + 32)} °F / {Math.round(forecast.main.temp - 273.15)} °C
                   </Card.Text>
                   <Card.Text>
                     {capitalizeFirstLetter(forecast.weather[0].description)}
@@ -240,9 +253,13 @@ function Plan() {
     );
   };
 
+  // -----------------------------------
+
+  // News API results box:
   const renderNews = () => {
     if (!newsData) return null;
 
+    // limit to 10 news results per country using slice
     return newsData.slice(0, 10).map((article, index) => (
       <div key={index} className="mb-3">
         <Card.Title>{article.title}</Card.Title>
@@ -263,6 +280,9 @@ function Plan() {
   };
 
   return (
+    // -----------------------------------------
+
+    // Logo area
     <Container className="mt-4">
       <Row>
         <Col md={12} className="text-center mb-4">
@@ -277,29 +297,41 @@ function Plan() {
           <h1>Learn, Plan, Go</h1>
         </Col>
       </Row>
-      <Form className="mb-4">
-        <Form.Group controlId="countryInput">
+
+      {/* ----------------------------------- */}
+
+      {/* Search bar */}
+      <Form
+        className="mb-4"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSearch();
+        }}
+      >
+        <Form.Group controlId="countryInput" className="form-group-search">
           <Form.Control
             type="text"
             placeholder="Search for a country to get started..."
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") handleSearch();
-            }}
           />
+          <Button variant="primary" type="submit" className="btn">
+            Search
+          </Button>
         </Form.Group>
-        <Button variant="primary" onClick={handleSearch}>
-          Search
-        </Button>
       </Form>
       {error && <Alert variant="danger">{error}</Alert>}
+
+      {/* ----------------------------------- */}
+
+      {/* Countries API results box */}
       {countryData && (
         <div className="results-container">
           <Row>
             <Col md={6}>{renderCountryInfo()}</Col>
             <Col md={6}>
               <Card className="mb-3">
+                {/* Google Maps API results box */}
                 <Card.Header className="text-center fs-4">Map</Card.Header>
                 <Card.Body>
                   <div className="map-container">
@@ -317,6 +349,7 @@ function Plan() {
             </Col>
           </Row>
           <Row>
+            {/* Header of OpenWeather API results box */}
             <Col>
               <Card className="mb-3">
                 <Card.Header className="text-center fs-4">
@@ -326,6 +359,8 @@ function Plan() {
               </Card>
             </Col>
           </Row>
+
+          {/* Header of News API results box */}
           <Row>
             <Col>
               <Card className="mb-3">
@@ -336,6 +371,10 @@ function Plan() {
           </Row>
         </div>
       )}
+
+      {/* ----------------------------------- */}
+
+      {/* copyright for footer, grabs current year */}
       <footer className="mt-4 text-center">
         <p>&copy; {new Date().getFullYear()} GeoGlimpse</p>
       </footer>
